@@ -1,0 +1,180 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Purple Theme - Dark Professional Palette */
+    /* Using HSL format for Tailwind compatibility */
+    --background: 266 33% 15%;
+    --foreground: 299 47% 90%;
+
+    --card: 273 27% 20%;
+    --card-foreground: 299 47% 88%;
+
+    --popover: 273 27% 20%;
+    --popover-foreground: 299 47% 88%;
+
+    --primary: 276 59% 55%;
+    --primary-foreground: 299 47% 95%;
+
+    --secondary: 285 31% 64%;
+    --secondary-foreground: 266 33% 15%;
+
+    --accent: 299 47% 81%;
+    --accent-foreground: 266 33% 15%;
+
+    --muted: 266 33% 25%;
+    --muted-foreground: 299 47% 70%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 299 47% 95%;
+
+    --border: 266 33% 30%;
+    --input: 266 33% 30%;
+    --ring: 276 59% 55%;
+
+    --radius: 1rem;
+
+    /* Custom Purple Theme Colors */
+    --pink-orchid: 299 47% 81%;
+    --amethyst-smoke: 285 31% 64%;
+    --deep-lilac: 273 27% 48%;
+    --dusty-grape: 266 33% 41%;
+    --purple-x11: 276 59% 55%;
+    
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(266 33% 15%) 0%, hsl(273 27% 20%) 100%);
+    --gradient-card-primary: linear-gradient(145deg, hsl(276, 75%, 45%) 0%, hsl(276, 44%, 28%) 100%);
+    --gradient-card-secondary: linear-gradient(145deg, hsl(284, 53%, 45%) 0%, hsl(285, 13%, 24%) 100%);
+    --gradient-card-accent: linear-gradient(145deg, hsl(300, 75%, 34%) 0%, hsl(299, 79%, 15%) 100%);
+
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -4px hsl(266 33% 0% / 0.3);
+    --shadow-card: 0 8px 30px -8px hsl(266 33% 0% / 0.4);
+    --shadow-hover: 0 12px 40px -12px hsl(276 59% 0% / 0.5);
+
+    --sidebar-background: 266 33% 18%;
+    --sidebar-foreground: 299 47% 88%;
+    --sidebar-primary: 276 59% 55%;
+    --sidebar-primary-foreground: 299 47% 95%;
+    --sidebar-accent: 266 33% 25%;
+    --sidebar-accent-foreground: 299 47% 88%;
+    --sidebar-border: 266 33% 30%;
+    --sidebar-ring: 276 59% 55%;
+  }
+
+  /* Force dark theme - remove light theme */
+  .dark {
+    --background: 266 33% 15%;
+    --foreground: 299 47% 90%;
+
+    --card: 273 27% 20%;
+    --card-foreground: 299 47% 88%;
+
+    --popover: 273 27% 20%;
+    --popover-foreground: 299 47% 88%;
+
+    --primary: 276 59% 55%;
+    --primary-foreground: 299 47% 95%;
+
+    --secondary: 285 31% 64%;
+    --secondary-foreground: 266 33% 15%;
+
+    --accent: 299 47% 81%;
+    --accent-foreground: 266 33% 15%;
+
+    --muted: 266 33% 25%;
+    --muted-foreground: 299 47% 70%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 299 47% 95%;
+
+    --border: 266 33% 30%;
+    --input: 266 33% 30%;
+    --ring: 276 59% 55%;
+
+    --sidebar-background: 266 33% 18%;
+    --sidebar-foreground: 299 47% 88%;
+    --sidebar-primary: 276 59% 55%;
+    --sidebar-primary-foreground: 299 47% 95%;
+    --sidebar-accent: 266 33% 25%;
+    --sidebar-accent-foreground: 299 47% 88%;
+    --sidebar-border: 266 33% 30%;
+    --sidebar-ring: 276 59% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply text-foreground font-sans antialiased dark;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(to bottom, #a191aa, #d7bdcc);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  html {
+    @apply dark;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', sans-serif;
+    @apply font-semibold tracking-tight;
+  }
+
+  code, pre, kbd, samp {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer components {
+  .section-container {
+    @apply max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16 md:py-20;
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent;
+  }
+
+  .card-blue {
+    background: var(--gradient-card-primary);
+    @apply text-white rounded-2xl p-6 shadow-card transition-all duration-300 hover:shadow-hover hover:-translate-y-1;
+  }
+
+  .card-green {
+    background: var(--gradient-card-secondary);
+    @apply text-white rounded-2xl p-6 shadow-card transition-all duration-300 hover:shadow-hover hover:-translate-y-1;
+  }
+
+  .card-coral {
+    background: var(--gradient-card-accent);
+    @apply text-white rounded-2xl p-6 shadow-card transition-all duration-300 hover:shadow-hover hover:-translate-y-1;
+  }
+
+  .btn-primary {
+    @apply bg-foreground text-background px-6 py-3 rounded-full font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg;
+  }
+
+  .btn-secondary {
+    @apply border-2 border-foreground text-foreground px-6 py-3 rounded-full font-medium transition-all duration-300 hover:bg-foreground hover:text-background;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
