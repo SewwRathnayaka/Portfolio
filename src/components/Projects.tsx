@@ -1,7 +1,7 @@
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { useRef, useState, useCallback, useMemo } from "react";
 import { ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
-import background from "../assets/background.webp";
+import background from "../assets/background1.webp";
 import project1 from "../assets/p1.webp";
 import project2 from "../assets/p2.webp";
 import project3 from "../assets/p3.webp";

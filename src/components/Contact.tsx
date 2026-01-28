@@ -3,7 +3,7 @@ import { useRef, useState, useCallback } from "react";
 import { Github, Linkedin, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import emailjs from "@emailjs/browser";
-import backgroundImage from "@/assets/background.webp";
+import backgroundImage from "@/assets/background1.webp";
 
 const BACKGROUND_GRADIENT = "linear-gradient(to right, rgba(41, 14, 54, 0.40), rgba(144, 76, 84, 0.25))";
 const BOX_SHADOW = "0 8px 32px 0 rgba(0, 0, 0, 0.37)";
@@ -132,7 +132,7 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="h-screen sm:min-h-screen pt-0 pb-2 sm:pb-8 relative overflow-hidden"
+      className="pt-6 pb-6 sm:pt-8 sm:pb-8 relative overflow-hidden"
       ref={ref}
       style={{ background: BACKGROUND_GRADIENT }}
     >

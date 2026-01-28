@@ -154,7 +154,7 @@ const Sidebar = () => {
   }, [isDragging, handleSliderMove, scrollToSection]);
 
   return (
-    <aside className="fixed left-0 top-[39%] md:top-1/2 -translate-y-1/2 z-30 flex md:flex">
+    <aside className="fixed left-2 md:left-0 top-1/2 md:top-1/2 -translate-y-1/2 z-30 flex md:flex">
       {/* Mobile Slider */}
       <div
         ref={sliderRef}

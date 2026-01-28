@@ -48,7 +48,7 @@ const About = () => {
     <section
       id="about"
       ref={ref}
-      className="relative h-screen lg:min-h-screen grid grid-cols-1 lg:grid-cols-3 overflow-hidden pt-4 sm:pt-4 pb-4 sm:pb-12"
+      className="relative grid grid-cols-1 lg:grid-cols-3 overflow-hidden py-6 sm:pt-4 sm:pb-12 lg:min-h-screen"
       style={{ background: BACKGROUND_GRADIENT }}
     >
       {/* --- LEFT SIDE – IMAGE --- */}
