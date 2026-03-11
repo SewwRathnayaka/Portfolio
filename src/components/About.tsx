@@ -1,8 +1,9 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useCallback } from "react";
-import profileImage from "@/assets/profile.webp";
 import { Download } from "lucide-react";
-import resume from "@/assets/SewwandiRathnayaka.pdf";
+
+const PROFILE_IMAGE = "https://irbyffxrvtqtbrloalvd.supabase.co/storage/v1/object/public/project-images/profile.webp";
+const RESUME_URL = "https://irbyffxrvtqtbrloalvd.supabase.co/storage/v1/object/public/project-images/SewwandiRathnayaka.pdf";
 
 const BACKGROUND_GRADIENT = "linear-gradient(to right, rgba(41, 14, 54, 0.20), rgba(144, 76, 84, 0.25))";
 const OVERLAY_COLOR = "rgba(41, 14, 54, 0.35)";
@@ -71,7 +72,7 @@ const About = () => {
           {/* Circular photo container (on top) */}
           <div className="relative w-full h-full rounded-full overflow-hidden bg-[linear-gradient(135deg,#1a0b2e_0%,#2e1065_100%)] border border- white/10 shadow-soft z-20">
             <img 
-              src={profileImage} 
+              src={PROFILE_IMAGE} 
               alt="Profile" 
               className="w-full h-full object-cover"
               loading="lazy"
@@ -80,7 +81,7 @@ const About = () => {
             
             {/* Crescent Download CV Button - inside the circular container for proper clipping */}
             <motion.a
-              href={resume}
+              href={RESUME_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="

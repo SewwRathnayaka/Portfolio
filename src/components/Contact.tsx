@@ -3,8 +3,7 @@ import { useRef, useState, useCallback } from "react";
 import { Github, Linkedin, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import emailjs from "@emailjs/browser";
-import backgroundImage from "@/assets/background1.webp";
-
+const BACKGROUND_IMAGE = "https://irbyffxrvtqtbrloalvd.supabase.co/storage/v1/object/public/project-images/background1.webp";
 const BACKGROUND_GRADIENT = "linear-gradient(to right, rgba(41, 14, 54, 0.40), rgba(144, 76, 84, 0.25))";
 const BOX_SHADOW = "0 8px 32px 0 rgba(0, 0, 0, 0.37)";
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -142,7 +141,7 @@ const Contact = () => {
           <div className="absolute left-2 right-2 top-0 bottom-0 sm:inset-4 md:inset-8 z-0">
             <div className="relative w-full h-full">
               <img
-                src={backgroundImage}
+                src={BACKGROUND_IMAGE}
                 alt="Background"
                 className="w-full h-full object-cover"
               />

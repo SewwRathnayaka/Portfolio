@@ -1,40 +1,9 @@
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { useRef, useState, useCallback, useMemo } from "react";
 import { ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
-import background from "../assets/background1.webp";
-import project1 from "../assets/p1.webp";
-import project2 from "../assets/p2.webp";
-import project3 from "../assets/p3.webp";
+import { useProjects } from "@/hooks/use-projects";
 
-const projects = [
-  {
-    title: "E-Commerce Storefront",
-    category: "Finance",
-    description:
-      "A complete a scalable, production-ready MERN e-commerce platform. Fully responsive React frontend, a secure Node.js/Express API, and a MongoDB backend and clean schema design. Key features include dynamic product filtering, Clerk authentication, Stripe payment integration, a shopping cart, and global error handling for stability.",
-    tech: ["React","JavaScript", "Node.js", "MongoDB", "Stripe", "Express", "Clerk"],
-    image: project1,
-    link: "https://fed-storefront-frontend-sewwandi.netlify.app",
-  },
-  {
-    title: "Fixfinder-Handyman Service Application",
-    category: "Service",
-    description:
-      "A complete service marketplace with separate role-based experiences for clients and service providers, enabling the full booking lifecycle from discovery to payment and reviews. End-to-End Service Flow, Real-Time Communication, Payment Processing, Reviews, and more.",
-    tech: ["MERN stack", "Tailwind CSS", "TypeScript", "Twilio","Socket.io","Clerk", "Stripe"],
-    image: project2,
-    link: "https://fix-frontend.netlify.app",
-  },
-  {
-    title: "Skill & Project Matching System",
-    category: "Management",
-    description:
-      " A system that helps consultancies and tech agencies efficiently manage their workforce by matching team members to projects based on their skills.",
-    tech: ["React", "Node.js", "MySQL", "Express", "JWT","CSS"],
-    image: project3,
-    link: "#",
-  },
-] as const;
+const BACKGROUND_IMAGE = "https://irbyffxrvtqtbrloalvd.supabase.co/storage/v1/object/public/project-images/background1.webp";
 
 const SPRING_CONFIG = {
   type: "spring" as const,
@@ -48,17 +17,18 @@ const DRAG_THRESHOLD = 100;
 const Projects = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { data: projects = [], isLoading, isError } = useProjects();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [dragging, setDragging] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
 
   const handleNext = useCallback(() => {
     setCurrentIndex((prev) => (prev + 1) % projects.length);
-  }, []);
+  }, [projects.length]);
 
   const handlePrev = useCallback(() => {
     setCurrentIndex((prev) => (prev - 1 + projects.length) % projects.length);
-  }, []);
+  }, [projects.length]);
 
   const handleCardClick = useCallback((index: number) => {
     if (!isDragging && index !== currentIndex) {
@@ -66,13 +36,17 @@ const Projects = () => {
     }
   }, [isDragging, currentIndex]);
 
-  const getCardPosition = useCallback((index: number, currentIdx: number) => {
-    const offset = index - currentIdx;
-    if (offset === 0) return 0; // Center
-    if (offset === 1 || offset === -(projects.length - 1)) return 1; // Right
-    if (offset === -1 || offset === projects.length - 1) return -1; // Left
-    return offset > 0 ? 2 : -2; // Further away
-  }, []);
+  const getCardPosition = useCallback(
+    (index: number, currentIdx: number) => {
+      const offset = index - currentIdx;
+      if (offset === 0) return 0; // Center
+      if (projects.length <= 1) return 0;
+      if (offset === 1 || offset === -(projects.length - 1)) return 1; // Right
+      if (offset === -1 || offset === projects.length - 1) return -1; // Left
+      return offset > 0 ? 2 : -2; // Further away
+    },
+    [projects.length],
+  );
 
   const getCardStyle = useCallback((position: number) => {
     if (position === 0) {
@@ -95,7 +69,7 @@ const Projects = () => {
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: `url(${background})`,
+          backgroundImage: `url(${BACKGROUND_IMAGE})`,
           filter: "blur(10px)  brightness(0.3)",
           transform: "scale(1.1)",
         }}
@@ -111,16 +85,29 @@ const Projects = () => {
           className="text-center mb-8 sm:mb-12 md:mb-16"
         >
         
-          <h2 className="font-heading text-lg sm:text-3xl md:text-4xl font-bold mt-2">
-            Featured Projects
-          </h2>
+          <h2 className="font-heading text-lg sm:text-3xl md:text-4xl font-bold mt-2">Featured Projects</h2>
           <p className="text-white/80 mt-4 max-w-xl mx-auto text-[10px] sm:text-xs md:text-sm px-4 ">
           A visual journey through projects crafted with curiosity, creativity, and code.
           </p>
           
         </motion.div>
 
+        {/* Loading / error states */}
+        {isLoading && (
+          <div className="flex items-center justify-center h-[260px] sm:h-[320px] md:h-[360px]">
+            <div className="w-8 h-8 border-4 border-white/20 border-t-white/70 rounded-full animate-spin" />
+          </div>
+        )}
+        {isError && !isLoading && (
+          <div className="flex items-center justify-center h-[260px] sm:h-[320px] md:h-[360px]">
+            <p className="text-xs sm:text-sm text-red-200/80">
+              Unable to load projects right now. Please try again later.
+            </p>
+          </div>
+        )}
+
         {/* Carousel Container */}
+        {!isLoading && !isError && projects.length > 0 && (
         <div className="relative h-[520px] sm:h-[350px] md:h-[700px] flex items-center justify-center overflow-hidden">
           {/* Navigation Arrows */}
           <button
@@ -243,7 +230,7 @@ const Projects = () => {
                       {/* Links */}
                       <div className="flex items-center gap-4 pt-3 sm:pt-4 border-t border-white/20">
                         <a
-                          href={project.link}
+                          href={project.link ?? "#"}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="flex items-center gap-2 text-xs sm:text-sm opacity-80 hover:opacity-100 transition-opacity text-foreground"
@@ -260,6 +247,16 @@ const Projects = () => {
             </AnimatePresence>
           </div>
         </div>
+        )}
+
+        {/* Empty state */}
+        {!isLoading && !isError && projects.length === 0 && (
+          <div className="flex items-center justify-center h-[260px] sm:h-[320px] md:h-[360px]">
+            <p className="text-xs sm:text-sm text-white/70">
+              Projects coming soon. Check back later.
+            </p>
+          </div>
+        )}
 
       </div>
     </section>

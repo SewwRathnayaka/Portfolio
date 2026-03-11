@@ -1,73 +1,71 @@
-# Welcome to your Lovable project
+# Sewwandi Rathnayaka - Portfolio
 
-## Project info
+Personal portfolio website built with React, TypeScript, Tailwind CSS, and Framer Motion. Projects are managed dynamically via Supabase with an admin interface.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Tech Stack
 
-## How can I edit this code?
+- **React 18** + **TypeScript**
+- **Vite** (build tooling)
+- **Tailwind CSS** + **shadcn/ui** (styling)
+- **Framer Motion** (animations)
+- **Supabase** (database + auth for admin)
+- **EmailJS** (contact form)
+- **React Query** (data fetching)
 
-There are several ways of editing your application.
+## Getting Started
 
-**Use Lovable**
+### Prerequisites
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+- Node.js 18+
+- npm
 
-Changes made via Lovable will be committed automatically to this repo.
+### Installation
 
-**Use your preferred IDE**
+```bash
+git clone <YOUR_REPO_URL>
+cd Portfolio
+npm install
+```
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Environment Variables
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+Copy the example file and fill in your values:
 
-Follow these steps:
+```bash
+cp .env.example .env
+```
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+Required variables:
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+| Variable | Description |
+|---|---|
+| `VITE_EMAILJS_SERVICE_ID` | EmailJS service ID |
+| `VITE_EMAILJS_TEMPLATE_ID` | EmailJS template ID |
+| `VITE_EMAILJS_PUBLIC_KEY` | EmailJS public key |
+| `VITE_RECIPIENT_EMAIL` | Email to receive contact form submissions |
+| `VITE_SUPABASE_URL` | Supabase project URL |
+| `VITE_SUPABASE_ANON_KEY` | Supabase anon/public key |
 
-# Step 3: Install the necessary dependencies.
-npm i
+### Development
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+### Build
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```bash
+npm run build
+npm run preview
+```
 
-**Use GitHub Codespaces**
+## Admin Panel
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Navigate to `/admin/projects` to manage portfolio projects (requires Supabase auth login).
 
-## What technologies are used for this project?
+## Deployment
 
-This project is built with:
+Set all environment variables on your hosting platform (e.g. Render, Vercel, Netlify), then deploy with:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+- **Build command:** `npm install && npm run build`
+- **Publish directory:** `dist`

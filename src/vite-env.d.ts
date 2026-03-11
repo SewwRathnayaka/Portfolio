@@ -42,13 +42,7 @@ interface ImportMetaEnv {
   readonly VITE_EMAILJS_TEMPLATE_ID: string;
   readonly VITE_EMAILJS_PUBLIC_KEY: string;
   readonly VITE_RECIPIENT_EMAIL: string;
+  readonly VITE_SUPABASE_URL: string;
+  readonly VITE_SUPABASE_ANON_KEY: string;
 }
 
-// Extend React HTML attributes to include fetchPriority
-import "react";
-
-declare module "react" {
-  interface ImgHTMLAttributes<T> {
-    fetchPriority?: "high" | "low" | "auto";
-  }
-}

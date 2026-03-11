@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
-import backgroundImage from "@/assets/background1.webp";
-
+const BACKGROUND_IMAGE = "https://irbyffxrvtqtbrloalvd.supabase.co/storage/v1/object/public/project-images/background1.webp";
+const BACKGROUND_IMAGE_MOBILE = "https://irbyffxrvtqtbrloalvd.supabase.co/storage/v1/object/public/project-images/background-mobile.webp";
 const BACKGROUND_GRADIENT = "linear-gradient(to right, rgba(41, 14, 54, 0.20), rgba(144, 76, 84, 0.25))";
 
 const Hero = () => {
@@ -25,11 +25,10 @@ const Hero = () => {
       <div className="absolute inset-0 z-0">
         <div className="relative w-full h-full sm:hidden">
           <img
-            src={backgroundImage}
+            src={BACKGROUND_IMAGE_MOBILE}
             alt="Background"
             className="w-full h-full object-cover"
             loading="eager"
-            fetchpriority="high"
           />
           <div className="absolute inset-0 bg-black/20" />
         </div>
@@ -40,10 +39,10 @@ const Hero = () => {
       <AnimatePresence>
         {showToast && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
             className="md:hidden fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-3 py-2 shadow-lg"
           >
             <p className="text-white text-[10px] sm:text-xs font-mono">Hey, Welcome! 👋</p>
@@ -64,28 +63,22 @@ const Hero = () => {
           <div className="hidden sm:block absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 md:w-[calc(100%)] lg:inset-0 lg:left-1/2 lg:-translate-x-1/2 lg:top-1/2 lg:-translate-y-1/2 lg:w-[140%] h-[calc(100%+2rem)] md:h-full lg:h-full z-0 overflow-hidden">
             <div className="relative w-full h-full">
               <img
-                src={backgroundImage}
+                src={BACKGROUND_IMAGE}
                 alt="Background"
                 className="w-full h-full object-cover"
                 loading="eager"
-                fetchpriority="high"
               />
               <div className="absolute inset-0 bg-black/20" />
             </div>
           </div>
 
           {/* Content with Glass Morphism - No rounded corners */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="relative text-center backdrop-blur-md bg-card/40 p-2 sm:p-6 md:p-8 lg:p-10 py-6 sm:py-6 md:py-8 lg:py-10 border border-white/10 shadow-2xl z-10 mx-8 sm:mx-4 md:mx-6 lg:mx-0 my-2 sm:my-0"
-          >
+          <div className="relative text-center backdrop-blur-md bg-card/40 p-2 sm:p-6 md:p-8 lg:p-10 py-6 sm:py-6 md:py-8 lg:py-10 border border-white/10 shadow-2xl z-10 mx-8 sm:mx-4 md:mx-6 lg:mx-0 my-2 sm:my-0">
             {/* Main Heading */}
             <motion.h1
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
+              transition={{ delay: 0.2, duration: 0.7, ease: "easeOut" }}
               className="font-heading text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-2 sm:mb-3 md:mb-4"
             > 
             
@@ -101,9 +94,9 @@ const Hero = () => {
 
             {/* Stats */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
+              transition={{ delay: 0.5, duration: 0.7, ease: "easeOut" }}
               className="grid grid-cols-2 gap-2 sm:gap-4 md:gap-6 mt-3 sm:mt-6 md:mt-8 pt-2 sm:pt-4 md:pt-6 border-t border-border"
             >
               <div>
@@ -115,7 +108,7 @@ const Hero = () => {
                 <p className="text-[8px] sm:text-xs text-destructive-foreground">Projects Done</p>
               </div>
             </motion.div>
-          </motion.div>
+          </div>
         </div>
       </div>
 
