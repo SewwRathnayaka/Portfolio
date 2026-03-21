@@ -3,7 +3,7 @@ import { useRef, useState, useCallback, useMemo } from "react";
 import { ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
 import { useProjects } from "@/hooks/use-projects";
 
-const BACKGROUND_IMAGE = "https://irbyffxrvtqtbrloalvd.supabase.co/storage/v1/object/public/project-images/background1.webp";
+const BACKGROUND_IMAGE = "https://irbyffxrvtqtbrloalvd.supabase.co/storage/v1/object/public/project-images/background.webp";
 
 const SPRING_CONFIG = {
   type: "spring" as const,

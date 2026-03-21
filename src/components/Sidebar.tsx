@@ -16,38 +16,37 @@ const Sidebar = () => {
   const [isDragging, setIsDragging] = useState(false);
   const [thumbPosition, setThumbPosition] = useState(0);
   const sliderRef = useRef<HTMLDivElement>(null);
+  const sliderRectRef = useRef<{ top: number; height: number } | null>(null);
 
+  // Use Intersection Observer instead of scroll + offsetTop/offsetHeight to avoid forced reflows
   useEffect(() => {
-    let ticking = false;
+    const observers: IntersectionObserver[] = [];
 
-    const handleScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const scrollPosition = window.scrollY + window.innerHeight / 2;
+    sections.forEach((section) => {
+      const element = document.getElementById(section.id);
+      if (!element) return;
 
-          for (const section of sections) {
-            const element = document.getElementById(section.id);
-            if (element) {
-              const { offsetTop, offsetHeight } = element;
-              if (
-                scrollPosition >= offsetTop &&
-                scrollPosition < offsetTop + offsetHeight
-              ) {
-                setCurrentSection(section.id);
-                break;
-              }
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              setCurrentSection(section.id);
+              break;
             }
           }
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
+        },
+        {
+          root: null,
+          rootMargin: "-40% 0px -40% 0px", // Consider "in view" when section is in the middle 20% vertically
+          threshold: 0,
+        }
+      );
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll(); // Check on mount
+      observer.observe(element);
+      observers.push(observer);
+    });
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => observers.forEach((o) => o.disconnect());
   }, []);
 
   // Calculate thumb position based on current section
@@ -59,13 +58,22 @@ const Sidebar = () => {
     }
   }, [currentSection]);
 
-  // Memoized handler for slider movement
+  // Memoized handler for slider movement - uses cached rect to avoid forced reflow on every move
   const handleSliderMove = useCallback((clientY: number) => {
-    if (!sliderRef.current) return;
-    const rect = sliderRef.current.getBoundingClientRect();
+    const rect = sliderRectRef.current;
+    if (!rect) return;
     const y = clientY - rect.top;
     const percentage = Math.max(0, Math.min(100, (y / rect.height) * 100));
     setThumbPosition(percentage);
+  }, []);
+
+  const cacheSliderRect = useCallback(() => {
+    if (sliderRef.current) {
+      const rect = sliderRef.current.getBoundingClientRect();
+      sliderRectRef.current = { top: rect.top, height: rect.height };
+    } else {
+      sliderRectRef.current = null;
+    }
   }, []);
 
   // Memoized handler for scrolling to section
@@ -94,11 +102,12 @@ const Sidebar = () => {
     }
   }, [thumbPosition]);
 
-  // Mobile slider drag handlers - memoized
+  // Mobile slider drag handlers - memoized; cache rect once at drag start to avoid reflows
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
     setIsDragging(true);
+    cacheSliderRect();
     handleSliderMove(e.touches[0].clientY);
-  }, [handleSliderMove]);
+  }, [handleSliderMove, cacheSliderRect]);
 
   const handleTouchMove = useCallback((e: React.TouchEvent) => {
     if (isDragging) {
@@ -116,8 +125,9 @@ const Sidebar = () => {
 
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
     setIsDragging(true);
+    cacheSliderRect();
     handleSliderMove(e.clientY);
-  }, [handleSliderMove]);
+  }, [handleSliderMove, cacheSliderRect]);
 
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
     if (isDragging) {
