@@ -31,7 +31,7 @@ const Index = () => {
       <Suspense fallback={<LoadingFallback />}>
         <About />
         <Skills />
-        {/* Defer Projects (and Supabase) until user scrolls near this section to shorten critical path */}
+        {/* Defer Projects until user scrolls near this section to shorten critical path */}
         <LazyWhenInView id="projects" rootMargin="300px" minHeight="min-h-[420px]">
           <Suspense fallback={<ProjectsSectionPlaceholder />}>
             <Projects />

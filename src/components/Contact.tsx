@@ -3,7 +3,9 @@ import { useRef, useState, useCallback } from "react";
 import { Github, Linkedin, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import emailjs from "@emailjs/browser";
-const BACKGROUND_IMAGE = "https://irbyffxrvtqtbrloalvd.supabase.co/storage/v1/object/public/project-images/background.webp";
+import { SITE_IMAGES } from "@/lib/site-assets";
+
+const BACKGROUND_IMAGE = SITE_IMAGES.background;
 const BACKGROUND_GRADIENT = "linear-gradient(to right, rgba(41, 14, 54, 0.40), rgba(144, 76, 84, 0.25))";
 const BOX_SHADOW = "0 8px 32px 0 rgba(0, 0, 0, 0.37)";
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -60,7 +62,7 @@ const Contact = () => {
     const recipientEmail = import.meta.env.VITE_RECIPIENT_EMAIL;
 
     if (!serviceId || !templateId || !publicKey) {
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.DEV) {
         console.error("EmailJS configuration is missing.");
       }
       toast({
@@ -115,7 +117,7 @@ const Contact = () => {
       });
       setFormData({ name: "", email: "", message: "" });
     } catch (error) {
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.DEV) {
         console.error("EmailJS Error:", error);
       }
       toast({

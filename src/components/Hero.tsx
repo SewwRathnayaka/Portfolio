@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
+import { SITE_IMAGES } from "@/lib/site-assets";
 
-const BACKGROUND_IMAGE = "https://irbyffxrvtqtbrloalvd.supabase.co/storage/v1/object/public/project-images/background.webp";
-const BACKGROUND_IMAGE_MOBILE = "https://irbyffxrvtqtbrloalvd.supabase.co/storage/v1/object/public/project-images/background-mobile%20(1).webp";
+const BACKGROUND_IMAGE = SITE_IMAGES.background;
+const BACKGROUND_IMAGE_MOBILE = SITE_IMAGES.backgroundMobile;
 const BACKGROUND_GRADIENT = "linear-gradient(to right, rgba(41, 14, 54, 0.20), rgba(144, 76, 84, 0.25))";
 
 const ROTATING_WORDS = [

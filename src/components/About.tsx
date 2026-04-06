@@ -1,9 +1,10 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useCallback } from "react";
 import { Download } from "lucide-react";
+import { RESUME_PATH, SITE_IMAGES } from "@/lib/site-assets";
 
-const PROFILE_IMAGE = "https://irbyffxrvtqtbrloalvd.supabase.co/storage/v1/object/public/project-images/profile.webp";
-const RESUME_URL = "https://irbyffxrvtqtbrloalvd.supabase.co/storage/v1/object/public/project-images/SewwandiRathnayaka.pdf";
+const PROFILE_IMAGE = SITE_IMAGES.profile;
+const RESUME_URL = RESUME_PATH;
 
 const BACKGROUND_GRADIENT = "linear-gradient(to right, rgba(41, 14, 54, 0.20), rgba(144, 76, 84, 0.25))";
 const OVERLAY_COLOR = "rgba(41, 14, 54, 0.35)";

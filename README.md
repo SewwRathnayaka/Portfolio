@@ -1,6 +1,6 @@
 # Sewwandi Rathnayaka - Portfolio
 
-Personal portfolio website built with React, TypeScript, Tailwind CSS, and Framer Motion. Projects are managed dynamically via Supabase with an admin interface.
+Personal portfolio website built with React, TypeScript, Tailwind CSS, and Framer Motion. Projects and site images are static: edit `src/data/projects.ts` and add files under `public/assets/`.
 
 ## Tech Stack
 
@@ -8,7 +8,6 @@ Personal portfolio website built with React, TypeScript, Tailwind CSS, and Frame
 - **Vite** (build tooling)
 - **Tailwind CSS** + **shadcn/ui** (styling)
 - **Framer Motion** (animations)
-- **Supabase** (database + auth for admin)
 - **EmailJS** (contact form)
 - **React Query** (data fetching)
 
@@ -58,10 +57,6 @@ npm run dev
 npm run build
 npm run preview
 ```
-
-## Admin Panel
-
-Navigate to `/admin/projects` to manage portfolio projects (requires Supabase auth login).
 
 ## Deployment
 

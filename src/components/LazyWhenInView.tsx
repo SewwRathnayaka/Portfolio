@@ -12,7 +12,7 @@ interface LazyWhenInViewProps {
 
 /**
  * Renders children only when the sentinel enters (or is near) the viewport.
- * Used to defer loading of heavy sections (e.g. Projects + Supabase) until the user scrolls,
+ * Used to defer loading of heavy sections (e.g. Projects) until the user scrolls,
  * shortening the critical request chain for LCP.
  */
 const LazyWhenInView = ({

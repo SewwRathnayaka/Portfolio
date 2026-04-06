@@ -2,8 +2,9 @@ import { motion, AnimatePresence, useInView } from "framer-motion";
 import { useRef, useState, useCallback, useMemo } from "react";
 import { ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
 import { useProjects } from "@/hooks/use-projects";
+import { SITE_IMAGES } from "@/lib/site-assets";
 
-const BACKGROUND_IMAGE = "https://irbyffxrvtqtbrloalvd.supabase.co/storage/v1/object/public/project-images/background.webp";
+const BACKGROUND_IMAGE = SITE_IMAGES.background;
 
 const SPRING_CONFIG = {
   type: "spring" as const,
